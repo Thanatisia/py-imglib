@@ -5,6 +5,30 @@ import os
 import sys
 from PIL import Image, ImageDraw, ImageFilter, ImageOps, ImageChops
 
+def get_pixel_values(input_image, x_Row, y_Col):
+    """
+    Get the Pixel Values (and alpha transparency if available) of the image
+    """
+    # Initialize Variables
+    target_list = []
+
+    # Obtain the image mode
+    image_mode = input_image.mode
+
+    # Check if input image contains an alpha
+    if image_mode != "RGBA":
+        # Not RGBA (RGB-only)
+        # getting the RGB pixel value.
+        r, g, b = input_image.getpixel((x_Row, y_Col))
+        target_list = [r,g,b]
+    else:
+        # RGBA
+        r, g, b, a = input_image.getpixel((x_Row, y_Col))
+        target_list = [r,g,b,a]
+
+    # Output/Return
+    return target_list
+
 def get_image_pixels(input_image, pixel_map, width, height):
     """
     Iterate through the image and return a dictionary (key-value) mapping all the points and cell/pixels values making up the image
@@ -14,14 +38,17 @@ def get_image_pixels(input_image, pixel_map, width, height):
         # (x,y) : [r,g,b]
     }
 
+    # Obtain the image mode
+    image_mode = input_image.mode
+    
     # Iterate through the image pixel by pixel across the row and down the columns and map the color density of that pixel (black/white) to the current X value (row number)
     for i in range(width): 
         for j in range(height): 
-            # getting the RGB pixel value. 
-            r, g, b = input_image.getpixel((i, j)) 
-                  
+            # getting the RGB(A) pixel value. 
+            pixel_color_values = get_pixel_values(input_image, i, j)
+
             # Map the current pixel's RGB value to the current row x column
-            image_map[i,j] = [r,g,b]
+            image_map[i,j] = pixel_color_values
 
     # Output/Return
     return image_map
