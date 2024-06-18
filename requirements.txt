@@ -1,0 +1,7 @@
+# Python packages and dependencies
+
+## Pip Packages
+pillow
+
+## Git Packages
+
