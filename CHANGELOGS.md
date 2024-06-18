@@ -32,4 +32,19 @@
                     + Added new module 'pixels.py' for Pixel-related functions
                     + Added new module 'translation.py' for Image Manipulation and Transformation functionalities
 
+#### 1913H
++ Version: v0.1.1
+
+- Version Changes
+    - Updated pyproject.toml package configuration specifications
+        + Changed package name
+        + Added dependencies 'pillow'
+        + Set 'main-test.py' in 'src/' as the main entry point temporarily
+
+- Updates
+    - Updated package configuration specifications document 'pyproject.toml'
+        + Updated package version to v0.1.1
+        + Changed package name
+        + Added dependencies 'pillow'
+        + Set 'main-test.py' in 'src/' as the main entry point temporarily
 
