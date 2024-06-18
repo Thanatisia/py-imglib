@@ -48,3 +48,10 @@
         + Added dependencies 'pillow'
         + Set 'main-test.py' in 'src/' as the main entry point temporarily
 
+#### 1923H
+- Updates
+    - Updated package configuration specifications document 'pyproject.toml'
+        + Renamed 'main-test' => 'main_test'
+    - Renamed 'main-test.py' => 'main_test.py' in 'src/'
+        + To be usable in a package
+

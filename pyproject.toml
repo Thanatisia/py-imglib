@@ -42,7 +42,7 @@ dependencies = [
 
 [project.scripts]
 # Program Entry Point(s) and scripts
-pyimglib-cli = "app.main-test:main"
+pyimglib-cli = "app.main_test:main"
 
 [project.urls]
 Homepage = "https://github.com/Thanatisia/py-imglib"
