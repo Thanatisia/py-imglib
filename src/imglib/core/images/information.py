@@ -17,3 +17,11 @@ def get_image_size(input_image):
 
     return [width, height]
 
+def get_image_color_mode(input_image):
+    """
+    Get the color mode of the image (i.e. RGB/RGBA)
+    """
+    # Obtain the image mode
+    image_mode = input_image.mode
+    return image_mode
+

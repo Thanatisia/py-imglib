@@ -6,10 +6,34 @@ import sys
 from imglib.core.images.pixels import get_colored_pixels
 from PIL import Image, ImageDraw, ImageFilter, ImageChops
 
+def color_transform(r, g, b, r_Factor=1, g_Factor=1, b_Factor=1, preset=""):
+    """
+    Tranform the colors based on the pro
+    """
+    # Initialize Variables
+    presets = {
+        "grayscale" : (0.299*r + 0.587*g + 0.114*b)
+    }
+
+    # Check if preset is provided
+    if preset != "":
+        # Not empty - provided
+        # Transform the colorset according to the presets
+        transformed_color = presets[preset]
+    else:
+        # Transform the colorset by multiplying the color factors and adding them together
+        transformed_color = (r_Factor*r + g_Factor*g + b_Factor*b)
+
+    # Return/Output
+    return transformed_color
+
 def convert_black_cells_to_transparent(input_image):
     """
     Convert the image to an RGBA value and convert all black areas into a transparent mask layer and return the RGBA object to the caller
     """
+    # Obtain the image mode
+    image_mode = input_image.mode
+
     # Convert image to RGBA
     rgba = input_image.convert("RGBA")
 
@@ -69,6 +93,9 @@ def img_grayscale(input_image, pixel_map, width, height, factor=0, orientation="
     :: Params
     
     """
+    # Obtain the image mode
+    image_mode = input_image.mode
+
     # Check factor (What fraction of the image to grayscale)
     # 2 = 1/2
     if factor > 0:
@@ -77,36 +104,69 @@ def img_grayscale(input_image, pixel_map, width, height, factor=0, orientation="
             case "x":
                 for i in range(width//factor): 
                     for j in range(height): 
-                        # getting the RGB pixel value. 
-                        r, g, b = input_image.getpixel((i, j)) 
-                  
-                        # Apply formula of grayscale: 
-                        grayscale = (0.299*r + 0.587*g + 0.114*b) 
-          
-                        # setting the pixel value. 
-                        pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale)) 
+                        # Check if input image contains an alpha
+                        if image_mode != "RGBA":
+                            # getting the RGB pixel value. 
+                            r, g, b = input_image.getpixel((i, j)) 
+                      
+                            # Apply formula of grayscale: 
+                            grayscale = (0.299*r + 0.587*g + 0.114*b) 
+              
+                            # setting the pixel value. 
+                            pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale)) 
+                        else:
+                            # getting the RGB pixel value. 
+                            r, g, b, a = input_image.getpixel((i, j)) 
+                      
+                            # Apply formula of grayscale: 
+                            grayscale = (0.299*r + 0.587*g + 0.114*b) 
+              
+                            # setting the pixel value. 
+                            pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale), int(a))
             case "y":
                 for i in range(width): 
                     for j in range(height//factor): 
-                        # getting the RGB pixel value. 
-                        r, g, b = input_image.getpixel((i, j)) 
-                  
-                        # Apply formula of grayscale: 
-                        grayscale = (0.299*r + 0.587*g + 0.114*b) 
-          
-                        # setting the pixel value. 
-                        pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale)) 
+                        # Check if input image contains an alpha
+                        if image_mode != "RGBA":
+                            # getting the RGB pixel value. 
+                            r, g, b = input_image.getpixel((i, j)) 
+                      
+                            # Apply formula of grayscale: 
+                            grayscale = (0.299*r + 0.587*g + 0.114*b) 
+              
+                            # setting the pixel value. 
+                            pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale)) 
+                        else:
+                            # getting the RGB pixel value. 
+                            r, g, b, a = input_image.getpixel((i, j)) 
+                      
+                            # Apply formula of grayscale: 
+                            grayscale = (0.299*r + 0.587*g + 0.114*b) 
+              
+                            # setting the pixel value. 
+                            pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale), int(a)) 
     else:
         for i in range(width): 
             for j in range(height): 
-                # getting the RGB pixel value. 
-                r, g, b = input_image.getpixel((i, j)) 
-                  
-                # Apply formula of grayscale: 
-                grayscale = (0.299*r + 0.587*g + 0.114*b) 
-          
-                # setting the pixel value. 
-                pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale))
+                # Check if input image contains an alpha
+                if image_mode != "RGBA":
+                    # getting the RGB pixel value. 
+                    r, g, b = input_image.getpixel((i, j)) 
+                      
+                    # Apply formula of grayscale: 
+                    grayscale = (0.299*r + 0.587*g + 0.114*b) 
+              
+                    # setting the pixel value. 
+                    pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale))
+                else:
+                    # getting the RGB pixel value. 
+                    r, g, b, a = input_image.getpixel((i, j)) 
+                      
+                    # Apply formula of grayscale: 
+                    grayscale = (0.299*r + 0.587*g + 0.114*b) 
+              
+                    # setting the pixel value. 
+                    pixel_map[i, j] = (int(grayscale), int(grayscale), int(grayscale), int(a))
 
 def extract_populated_areas(input_image, pixel_map, image_map, out_fname="out", format="png"):
     """

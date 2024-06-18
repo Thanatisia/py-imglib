@@ -32,4 +32,51 @@
                     + Added new module 'pixels.py' for Pixel-related functions
                     + Added new module 'translation.py' for Image Manipulation and Transformation functionalities
 
+#### 1913H
++ Version: v0.1.1
+
+- Version Changes
+    - Updated pyproject.toml package configuration specifications
+        + Changed package name
+        + Added dependencies 'pillow'
+        + Set 'main-test.py' in 'src/' as the main entry point temporarily
+
+- Updates
+    - Updated package configuration specifications document 'pyproject.toml'
+        + Updated package version to v0.1.1
+        + Changed package name
+        + Added dependencies 'pillow'
+        + Set 'main-test.py' in 'src/' as the main entry point temporarily
+
+#### 1923H
+- Updates
+    - Updated package configuration specifications document 'pyproject.toml'
+        + Renamed 'main-test' => 'main_test'
+    - Renamed 'main-test.py' => 'main_test.py' in 'src/'
+        + To be usable in a package
+
+#### 2126H
++ Version: v0.1.2
+
+- Version Changes
+    - Updated pyproject.toml package configuration specifications
+        + Updated package version to 'v0.1.2'
+
+- Updates
+    - Updated document 'README.md'
+        + Added package version 'v0.1.2'
+        + Converted document format from DOS to UNIX
+    - Updated package configuration specifications document 'pyproject.toml'
+        + Updated package version to 'v0.1.2'
+    - Updated module 'main_test.py' in 'src/app'
+        + Moved functions to the respective libraries
+        + Added importing of package modules/libraries
+    - Updated module 'information.py' in 'src/imglib/core/images/'
+        + Added new functions
+    - Updated module 'pixels.py' in 'src/imglib/core/images/'
+        + Added new functions
+        + Added RGBA color mode check
+    - Updated module 'translation.py' in 'src/imglib/core/images/'
+        + Added new functions
+        + Added RGBA color mode check
 
